@@ -19,18 +19,22 @@ $('#get-fortune-button').on('click', showFortune);
 
 // PART 2: SHOW WEATHER
 
+function replaceForecast(response){
+    $('#weather-info').html(response.forecast);
+}
+
 function showWeather(evt) {
     evt.preventDefault();
 
-    let url = "/weather.json";
+    //let url = "/weather.json";
     let formData = {"zipcode": $("#zipcode-field").val()};
 
+    $.get("/weather.json", formData, replaceForecast);
 
-    // TODO: request weather with that URL and show the forecast in #weather-info
 }
-document.getElementById('get-fortune-button').addEventListener('submit', showFortune)
+//document.getElementById('get-fortune-button').addEventListener('submit', showFortune)
 // with jQuery
-// $("#weather-form").on('submit', showWeather);
+$("#weather-form").on('submit', showWeather);
 
 
 
