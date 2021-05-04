@@ -41,14 +41,57 @@ $("#weather-form").on('submit', showWeather);
 
 // PART 3: ORDER MELONS
 
+function updateMelons(response){
+    if (response.code === 'OK'){
+        $('#order-status').html(response.msg);
+    } 
+    else {
+        $('#order-status').addClass('order-error');
+        $('#order-status').html(response.msg);
+    }
+}
 function orderMelons(evt) {
     evt.preventDefault();
 
-    // TODO: show the result message after your form
-    // TODO: if the result code is ERROR, make it show up in red (see our CSS!)
+    let formData = {
+        "melon_type" : $("#melon-type-field").val(),
+        "qty" : $("#qty-field").val()
+    };
+
+    $.ajax({
+        url : "/order-melons.json",
+        data: JSON.stringify(formData),
+        contentType: "application/json",
+        success: updateMelons,
+        method : "POST",
+    });
+   
 }
-document.getElementById('order-form').addEventListener('submit', orderMelons)
-// with jQuery
+//document.getElementById('order-form').addEventListener('submit', orderMelons)
+//with jQuery
+$("#order-form").on('submit', orderMelons);
+
+
+
+// function updateMelons(results) {
+//     if (results.code === "OK") {
+//         $('#order-status').html("<p>" + results.msg + "</p>");
+//     }
+//     else {
+//         $('#order-status').addClass("order-error");
+//         $('#order-status').html("<p><b>" + results.msg + "</b></p>");
+//     }
+// }
+
+// function orderMelons(evt) {
+//     evt.preventDefault();
+
+//     let formInputs = {
+//         "melon_type": $("#melon-type-field").val(),
+//         "qty": $("#qty-field").val()
+//     };
+
+//     $.post("/order-melons.json", formInputs, updateMelons);
+// }
+
 // $("#order-form").on('submit', orderMelons);
-
-
