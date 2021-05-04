@@ -3,14 +3,17 @@
 
 // PART 1: SHOW A FORTUNE
 
-function showFortune(evt) {
-
-    // TODO: get the fortune and show it in the #fortune-text div
+function replaceFortune(response){
+    $('#fortune-text'). html(response);
 }
 
-document.querySelector('#get-fortune-button').addEventListener('click', showFortune)
+function showFortune(evt) {
+    $.get("/fortune", replaceFortune);
+}
+
+//document.querySelector('#get-fortune-button').addEventListener('click', showFortune)
 // with jQuery
-// $('#get-fortune-button').on('click', showFortune);
+$('#get-fortune-button').on('click', showFortune);
 
 
 
