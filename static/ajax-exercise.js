@@ -26,10 +26,10 @@ function replaceForecast(response){
 function showWeather(evt) {
     evt.preventDefault();
 
-    //let url = "/weather.json";
+    let url = "/weather.json";
     let formData = {"zipcode": $("#zipcode-field").val()};
 
-    $.get("/weather.json", formData, replaceForecast);
+    $.get(url, formData, replaceForecast);
 
 }
 //document.getElementById('get-fortune-button').addEventListener('submit', showFortune)
@@ -43,6 +43,10 @@ $("#weather-form").on('submit', showWeather);
 
 function updateMelons(response){
     if (response.code === 'OK'){
+        if($('#order-status').hasClass('order-error'))
+        {
+            $('#order-status').removeClass('order-error');
+        }
         $('#order-status').html(response.msg);
     } 
     else {
@@ -70,28 +74,3 @@ function orderMelons(evt) {
 //document.getElementById('order-form').addEventListener('submit', orderMelons)
 //with jQuery
 $("#order-form").on('submit', orderMelons);
-
-
-
-// function updateMelons(results) {
-//     if (results.code === "OK") {
-//         $('#order-status').html("<p>" + results.msg + "</p>");
-//     }
-//     else {
-//         $('#order-status').addClass("order-error");
-//         $('#order-status').html("<p><b>" + results.msg + "</b></p>");
-//     }
-// }
-
-// function orderMelons(evt) {
-//     evt.preventDefault();
-
-//     let formInputs = {
-//         "melon_type": $("#melon-type-field").val(),
-//         "qty": $("#qty-field").val()
-//     };
-
-//     $.post("/order-melons.json", formInputs, updateMelons);
-// }
-
-// $("#order-form").on('submit', orderMelons);
