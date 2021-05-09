@@ -74,3 +74,20 @@ function orderMelons(evt) {
 //document.getElementById('order-form').addEventListener('submit', orderMelons)
 //with jQuery
 $("#order-form").on('submit', orderMelons);
+
+// Further Study
+
+function displayImage(response){
+    const imageURL = response.message;
+    const dogImage = $('<img>').attr('src' , imageURL);
+    $('#dog-image').append(dogImage);
+}
+
+function getImage(){
+
+    let url = 'https://dog.ceo/api/breeds/image/random'
+    $.get(url, displayImage);
+
+}
+
+$('#get-dog-image').on('click', getImage);
